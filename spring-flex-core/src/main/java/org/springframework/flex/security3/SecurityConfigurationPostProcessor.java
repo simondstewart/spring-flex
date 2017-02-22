@@ -19,7 +19,6 @@ package org.springframework.flex.security3;
 import java.beans.PropertyDescriptor;
 import java.util.HashSet;
 import java.util.LinkedHashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -38,6 +37,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.flex.core.ExceptionTranslator;
 import org.springframework.security.web.FilterChainProxy;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.logout.LogoutHandler;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -71,7 +71,7 @@ public class SecurityConfigurationPostProcessor implements MergedBeanDefinitionP
 	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void postProcessMergedBeanDefinition(RootBeanDefinition beanDefinition, Class beanType, String beanName) {
-		if (SpringSecurityLoginCommand.class.isAssignableFrom(beanType)) {
+		if (beanType != null && SpringSecurityLoginCommand.class.isAssignableFrom(beanType)) {
 			MutablePropertyValues pv = beanDefinition.getPropertyValues();
 			boolean rememberMeServicesConfigured = (pv.getPropertyValue("rememberMeServices") != null);
 			if (this.sessionAuthenticationStrategy != null && pv.getPropertyValue("sessionAuthenticationStrategy") == null) {
@@ -157,8 +157,8 @@ public class SecurityConfigurationPostProcessor implements MergedBeanDefinitionP
     	public FilterChainAccessor(FilterChainProxy proxy) {    		
     		this.filters = new LinkedHashSet<Filter>();
 
-            for (List<Filter> filters : proxy.getFilterChainMap().values()) {
-                this.filters.addAll(filters);
+            for (SecurityFilterChain filterChain : proxy.getFilterChains()) {
+                this.filters.addAll(filterChain.getFilters());
             }
     	}
     	
