@@ -73,6 +73,8 @@ public class JmsAdapterTests extends AbstractMessageBrokerTests {
     public void destinationSubscribeTwiceSendUnsubscribe() throws Exception {
         JmsAdapter adapter = createAdapter();
         
+        FlexContext.setThreadLocalFlexClient(getMessageBroker().getFlexClientManager().getFlexClient("foo"));
+
         CommandMessage subscribeMessage = new CommandMessage(CommandMessage.SUBSCRIBE_OPERATION);
         subscribeMessage.setClientId("1234");
         subscribeMessage.setDestination(DEST_ID);
@@ -103,6 +105,8 @@ public class JmsAdapterTests extends AbstractMessageBrokerTests {
     public void subscribeUnsubscribeStop() throws Exception{
         
         JmsAdapter adapter = createAdapter();
+
+        FlexContext.setThreadLocalFlexClient(getMessageBroker().getFlexClientManager().getFlexClient("foo"));
         
         CommandMessage subscribeMessage = new CommandMessage(CommandMessage.SUBSCRIBE_OPERATION);
         subscribeMessage.setClientId("1234");
@@ -128,7 +132,9 @@ public class JmsAdapterTests extends AbstractMessageBrokerTests {
     public void subscribeTwiceUnsubscribeStop() throws Exception{
         
         JmsAdapter adapter = createAdapter();
-        
+
+        FlexContext.setThreadLocalFlexClient(getMessageBroker().getFlexClientManager().getFlexClient("foo"));
+
         CommandMessage subscribeMessage = new CommandMessage(CommandMessage.SUBSCRIBE_OPERATION);
         subscribeMessage.setClientId("1234");
         subscribeMessage.setDestination(DEST_ID);
@@ -159,6 +165,8 @@ public class JmsAdapterTests extends AbstractMessageBrokerTests {
         
         JmsAdapter adapter = createAdapter();
         
+        FlexContext.setThreadLocalFlexClient(getMessageBroker().getFlexClientManager().getFlexClient("foo"));
+
         CommandMessage subscribeMessage = new CommandMessage(CommandMessage.SUBSCRIBE_OPERATION);
         subscribeMessage.setClientId("1234");
         subscribeMessage.setDestination(DEST_ID);
@@ -199,6 +207,8 @@ public class JmsAdapterTests extends AbstractMessageBrokerTests {
     public void subscribeStopRestart() throws Exception{
         JmsAdapter adapter = createAdapter();        
         
+        FlexContext.setThreadLocalFlexClient(getMessageBroker().getFlexClientManager().getFlexClient("foo"));
+
         CommandMessage subscribeMessage = new CommandMessage(CommandMessage.SUBSCRIBE_OPERATION);
         subscribeMessage.setClientId("1234");
         subscribeMessage.setDestination(DEST_ID);

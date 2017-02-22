@@ -10,7 +10,7 @@
            http://www.springframework.org/schema/flex 
            http://www.springframework.org/schema/flex/spring-flex.xsd
            http://www.springframework.org/schema/security 
-           http://www.springframework.org/schema/security/spring-security-3.2.xsd
+           http://www.springframework.org/schema/security/spring-security.xsd
             http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
 
